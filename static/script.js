@@ -4,13 +4,13 @@ $(document).ready(function() {
     const userInput = $('#user-input');
 
     function addMessage(message, isUser = false) {
-        const messageClass = isUser ? 'text-end' : 'text-start';
+        const messageClass = isUser ? 'justify-content-end' : 'justify-content-start';
         const messageBg = isUser ? 'bg-primary' : 'bg-secondary';
         chatContainer.append(`
-            <div class="${messageClass} mb-2">
-                <span class="d-inline-block ${messageBg} rounded p-2">
+            <div class="d-flex ${messageClass} mb-2">
+                <div class="d-inline-block ${messageBg} rounded p-2 text-break" style="max-width: 75%;">
                     ${message}
-                </span>
+                </div>
             </div>
         `);
         chatContainer.scrollTop(chatContainer[0].scrollHeight);
