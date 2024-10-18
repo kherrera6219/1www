@@ -2,6 +2,7 @@ $(document).ready(function() {
     const chatContainer = $('#chat-container');
     const chatForm = $('#chat-form');
     const userInput = $('#user-input');
+    const feedbackBtn = $('#feedback-btn');
 
     function addMessage(message, isUser = false) {
         const messageClass = isUser ? 'justify-content-end' : 'justify-content-start';
@@ -30,10 +31,19 @@ $(document).ready(function() {
                 success: function(data) {
                     addMessage(data.response);
                 },
-                error: function() {
-                    addMessage("Sorry, there was an error processing your request.");
+                error: function(xhr, status, error) {
+                    console.error("Error:", error);
+                    addMessage("Sorry, there was an error processing your request. Please try again later.");
                 }
             });
+        }
+    });
+
+    feedbackBtn.on('click', function() {
+        const feedbackMessage = prompt("Please provide your feedback or report an issue:");
+        if (feedbackMessage) {
+            alert("Thank you for your feedback! We'll review it to improve our chatbot.");
+            // Here you can implement sending the feedback to a server endpoint if needed
         }
     });
 });
